@@ -6,10 +6,10 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 | ID | Título | Severidade | Status |
 |---|---|---|---|
-| BUG-001 | Calculadora executa automaticamente ao importar o módulo | Média | Não resolvido |
+| BUG-001 | Calculadora executa automaticamente ao importar o módulo | Média | Resolvido |
 | BUG-002 | Adição retorna o primeiro número somado duas vezes | Crítica | Não resolvido |
 | BUG-003 | Divisão por zero encerra o programa com exceção | Alta | Não resolvido |
-| BUG-004 | Fatorial retorna sempre zero | Alta | Não resolvido |
+| BUG-004 | Fatorial retorna sempre zero | Alta | Resolvido |
 | BUG-005 | Fatorial aceita número negativo e retorna 1 | Média | Não resolvido |
 | BUG-006 | Logaritmo natural usa função inexistente no NumPy | Alta | Não resolvido |
 | BUG-007 | Logaritmo base 10 calcula logaritmo natural | Alta | Não resolvido |
@@ -23,23 +23,23 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Localização do bug:** Calculadora.py, última linha (chamada `calculadora_cientifica()` fora de bloco `__main__`)
 
-**Descrição clara do bug:** A chamada à função principal está no nível do módulo, sem a proteção `if __name__ == "__main__":`. Qualquer `import Calculadora` dispara o menu e aguarda entrada do teclado. Com isso, nenhuma função pode ser importada para teste automatizado, pois o pytest falha com `EOFError` ao tentar ler a entrada padrão. O defeito bloqueia toda a prática de TDD sobre o arquivo.
+**Descrição clara do bug:** A chamada à função principal está no nível do módulo, sem a proteção `if __name__ == "__main__":`. Qualquer `import Calculadora` dispara o menu e aguarda entrada do teclado. Com isso, nenhuma função pode ser importada para teste automatizado, pois o pytest interrompe a coleta com `OSError` ao tentar ler a entrada padrão durante o import. O defeito bloqueia toda a prática de TDD sobre o arquivo.
 
 **Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
 1. Abrir o terminal na pasta do projeto.
-2. Executar `python -c "import Calculadora"`.
-3. Observar que o menu aparece e o programa pede a operação.
+2. Executar `python -c "import Calculadora"` e observar que o menu aparece e o programa pede a operação.
+3. Criar um teste que importe qualquer função do módulo e executar `pytest`.
 
 **Consistência:** Ocorre sempre.
 
 **Resultado esperado:** O import deve apenas carregar as funções, sem executar o menu.
 
-**Resultado obtido:** O menu é exibido e o programa tenta ler a entrada; sem teclado interativo, termina com `EOFError: EOF when reading a line`.
+**Resultado obtido:** O menu é exibido e o programa tenta ler a entrada; sem teclado interativo, termina com `EOFError: EOF when reading a line`. No pytest, a coleta é interrompida com `OSError: pytest: reading from stdin while output is captured`.
 
-**Evidências (logs de erro):** `evidencias/bug-001-import.log`
+**Evidências (logs de erro):** `evidencias/bug-001-import.log e evidencias/bug-001-pytest.log`
 
 **Severidade:** Média
 
@@ -49,7 +49,9 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Data de identificação:** 04/11/2026
 
-**Status:** Não resolvido
+**Status:** Resolvido
+
+**Correção aplicada:** a chamada final `calculadora_cientifica()` foi movida para dentro de `if __name__ == "__main__":`. A alteração foi feita como pré-requisito do TDD, já que os testes precisam importar o módulo sem disparar o menu. O comportamento ao executar `python Calculadora.py` permanece o mesmo.
 
 ---
 
@@ -156,7 +158,16 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Data de identificação:** 04/11/2026
 
-**Status:** Não resolvido
+**Status:** Resolvido
+
+**Documentação da correção (TDD):** o bug foi tratado seguindo o ciclo Red, Green, Refactor.
+
+1. Red: o arquivo `test_calculadora.py` foi criado com testes parametrizados para `fatorial` (valores 0, 1, 2, 5 e 10). Ao rodar `pytest -v`, os 5 testes falharam, confirmando o defeito (ver `evidencias/tdd-1-red.log`).
+2. Green: a correção mínima foi trocar `range(x+1)` por `range(1, x+1)`. Os 5 testes passaram (ver `evidencias/tdd-2-green.log`).
+3. Refactor: a variável `fat` foi renomeada para `resultado` e a função recebeu docstring, sem mudar o comportamento. Os testes continuaram passando.
+4. Verificação final: foram adicionados testes de regressão para `subtracao`, `multiplicacao` e `raiz_quadrada`, que não foram alteradas, e um teste marcado como `xfail` para o BUG-005, ainda não corrigido (ver `evidencias/tdd-3-final.log`).
+
+A correção resolve o bug porque o acumulador deixa de ser multiplicado por zero, e `fatorial(0)` passa a retornar 1, como define a matemática.
 
 ---
 

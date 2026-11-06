@@ -1,0 +1,17 @@
+$ pytest -v
+============================= test session starts ==============================
+plugins: platformdirs-4.13.0
+collecting ... collected 10 items
+
+test_calculadora.py::test_fatorial_valores_conhecidos[0-1] PASSED        [ 10%]
+test_calculadora.py::test_fatorial_valores_conhecidos[1-1] PASSED        [ 20%]
+test_calculadora.py::test_fatorial_valores_conhecidos[2-2] PASSED        [ 30%]
+test_calculadora.py::test_fatorial_valores_conhecidos[5-120] PASSED      [ 40%]
+test_calculadora.py::test_fatorial_valores_conhecidos[10-3628800] PASSED [ 50%]
+test_calculadora.py::test_fatorial_negativo_levanta_erro XFAIL (BUG-...) [ 60%]
+test_calculadora.py::test_subtracao PASSED                               [ 70%]
+test_calculadora.py::test_multiplicacao PASSED                           [ 80%]
+test_calculadora.py::test_raiz_quadrada_positiva PASSED                  [ 90%]
+test_calculadora.py::test_raiz_quadrada_negativa_retorna_erro PASSED     [100%]
+
+========================= 9 passed, 1 xfailed in 0.07s =========================
