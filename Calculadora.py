@@ -21,10 +21,11 @@ def raiz_quadrada(x):
     return np.sqrt(x)
 
 def fatorial(x):
-    fat = 1
+    """Retorna o fatorial de x (x inteiro não negativo)."""
+    resultado = 1
     for i in range(1, x+1):
-        fat *= i
-    return fat
+        resultado *= i
+    return resultado
 
 def logaritmo_natural(x):
     if x <= 0:
