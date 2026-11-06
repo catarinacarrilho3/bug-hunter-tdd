@@ -1,0 +1,119 @@
+$ pytest -v
+============================= test session starts ==============================
+plugins: platformdirs-4.13.0
+collecting ... collected 5 items
+
+test_calculadora.py::test_fatorial_valores_conhecidos[0-1] FAILED        [ 20%]
+test_calculadora.py::test_fatorial_valores_conhecidos[1-1] FAILED        [ 40%]
+test_calculadora.py::test_fatorial_valores_conhecidos[2-2] FAILED        [ 60%]
+test_calculadora.py::test_fatorial_valores_conhecidos[5-120] FAILED      [ 80%]
+test_calculadora.py::test_fatorial_valores_conhecidos[10-3628800] FAILED [100%]
+
+=================================== FAILURES ===================================
+____________________ test_fatorial_valores_conhecidos[0-1] _____________________
+
+n = 0, esperado = 1
+
+    @pytest.mark.parametrize(
+        "n, esperado",
+        [
+            (0, 1),
+            (1, 1),
+            (2, 2),
+            (5, 120),
+            (10, 3628800),
+        ],
+    )
+    def test_fatorial_valores_conhecidos(n, esperado):
+>       assert fatorial(n) == esperado
+E       assert 0 == 1
+E        +  where 0 = fatorial(0)
+
+test_calculadora.py:17: AssertionError
+____________________ test_fatorial_valores_conhecidos[1-1] _____________________
+
+n = 1, esperado = 1
+
+    @pytest.mark.parametrize(
+        "n, esperado",
+        [
+            (0, 1),
+            (1, 1),
+            (2, 2),
+            (5, 120),
+            (10, 3628800),
+        ],
+    )
+    def test_fatorial_valores_conhecidos(n, esperado):
+>       assert fatorial(n) == esperado
+E       assert 0 == 1
+E        +  where 0 = fatorial(1)
+
+test_calculadora.py:17: AssertionError
+____________________ test_fatorial_valores_conhecidos[2-2] _____________________
+
+n = 2, esperado = 2
+
+    @pytest.mark.parametrize(
+        "n, esperado",
+        [
+            (0, 1),
+            (1, 1),
+            (2, 2),
+            (5, 120),
+            (10, 3628800),
+        ],
+    )
+    def test_fatorial_valores_conhecidos(n, esperado):
+>       assert fatorial(n) == esperado
+E       assert 0 == 2
+E        +  where 0 = fatorial(2)
+
+test_calculadora.py:17: AssertionError
+___________________ test_fatorial_valores_conhecidos[5-120] ____________________
+
+n = 5, esperado = 120
+
+    @pytest.mark.parametrize(
+        "n, esperado",
+        [
+            (0, 1),
+            (1, 1),
+            (2, 2),
+            (5, 120),
+            (10, 3628800),
+        ],
+    )
+    def test_fatorial_valores_conhecidos(n, esperado):
+>       assert fatorial(n) == esperado
+E       assert 0 == 120
+E        +  where 0 = fatorial(5)
+
+test_calculadora.py:17: AssertionError
+_________________ test_fatorial_valores_conhecidos[10-3628800] _________________
+
+n = 10, esperado = 3628800
+
+    @pytest.mark.parametrize(
+        "n, esperado",
+        [
+            (0, 1),
+            (1, 1),
+            (2, 2),
+            (5, 120),
+            (10, 3628800),
+        ],
+    )
+    def test_fatorial_valores_conhecidos(n, esperado):
+>       assert fatorial(n) == esperado
+E       assert 0 == 3628800
+E        +  where 0 = fatorial(10)
+
+test_calculadora.py:17: AssertionError
+=========================== short test summary info ============================
+FAILED test_calculadora.py::test_fatorial_valores_conhecidos[0-1] - assert 0 ...
+FAILED test_calculadora.py::test_fatorial_valores_conhecidos[1-1] - assert 0 ...
+FAILED test_calculadora.py::test_fatorial_valores_conhecidos[2-2] - assert 0 ...
+FAILED test_calculadora.py::test_fatorial_valores_conhecidos[5-120] - assert ...
+FAILED test_calculadora.py::test_fatorial_valores_conhecidos[10-3628800] - as...
+============================== 5 failed in 0.11s ===============================
