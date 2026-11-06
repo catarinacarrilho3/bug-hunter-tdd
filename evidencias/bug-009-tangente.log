@@ -1,0 +1,24 @@
+# Entradas digitadas (em ordem): 12 | 45 | n
+$ python Calculadora.py
+Bem-vindo à Calculadora Científica
+Escolha a operação que deseja realizar:
+0. Sair
+1. Adição
+2. Subtração
+3. Multiplicação
+4. Divisão
+5. Potenciação
+6. Raiz Quadrada
+7. Fatorial
+8. Logaritmo Natural (ln)
+9. Logaritmo Base 10
+10. Seno
+11. Cosseno
+12. Tangente
+Digite o número da operação: Digite o ângulo em graus: Traceback (most recent call last):
+  File "Calculadora.py", line 108, in <module>
+    calculadora_cientifica()
+  File "Calculadora.py", line 99, in calculadora_cientifica
+    print("Resultado:", tangente(x, radianos=False))
+                        ^^^^^^^^
+NameError: name 'tangente' is not defined
