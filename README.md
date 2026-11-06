@@ -2,6 +2,8 @@
 
 Atividade individual de identificação de defeitos e correção com TDD sobre uma calculadora científica em Python (`Calculadora.py`).
 
+**Autora:** Catarina Carrilho de Almeida | Ciência de Dados e Inteligência Artificial, SENAI CIMATEC | Data: 04/11/2026
+
 ## Como executar
 
 ```bash
@@ -16,14 +18,14 @@ pytest -v                 # executa os testes
 Calculadora.py        código da calculadora (com a correção do BUG-001 e do BUG-004)
 test_calculadora.py   testes automatizados (pytest)
 Bugs.md               relatório de bugs (BUG-001 a BUG-012)
-evidencias/           logs de erro de cada bug e saídas do pytest em cada fase do TDD
+evidencias/           logs de erro, prints das execuções e saídas do pytest em cada fase do TDD
 ```
 
 ## Resumo do trabalho
 
 Foram identificados 12 defeitos na calculadora, todos descritos em `Bugs.md` com localização, passos para reproduzir, resultado esperado e obtido, evidências, severidade, impacto e sugestão de correção. Entre eles estão resultado incorreto na adição, fatorial sempre igual a zero, logaritmo natural com função inexistente, logaritmo base 10 calculando o logaritmo natural e funções de seno, cosseno e tangente que aparecem no menu mas nunca foram implementadas.
 
-O defeito escolhido para o TDD foi o BUG-004 (fatorial retorna sempre zero). O ciclo seguiu a ordem Red, Green e Refactor, e cada fase ficou registrada em um commit separado, com a saída do pytest em `evidencias/`. Antes do ciclo, o BUG-001 precisou ser corrigido, já que a chamada solta da função principal impedia qualquer importação do módulo pelos testes. Os demais bugs permanecem registrados como não resolvidos, e o BUG-005, que também envolve o fatorial, aparece nos testes como `xfail` para documentar o comportamento esperado.
+O defeito escolhido para o TDD foi o BUG-004 (fatorial retorna sempre zero). O ciclo seguiu a ordem Red, Green e Refactor, e cada fase ficou registrada com a saída do pytest em `evidencias/` (`tdd-1-red.log`, `tdd-2-green.log` e `tdd-3-final.log`), além da documentação detalhada no `Bugs.md`. Antes do ciclo, o BUG-001 precisou ser corrigido, já que a chamada solta da função principal impedia qualquer importação do módulo pelos testes. Os demais bugs permanecem registrados como não resolvidos, e o BUG-005, que também envolve o fatorial, aparece nos testes como `xfail` para documentar o comportamento esperado.
 
 ## Reflexão sobre o processo com Scrum
 

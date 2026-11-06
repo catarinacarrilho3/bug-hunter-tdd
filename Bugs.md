@@ -2,6 +2,9 @@
 
 Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora científica), elaborado para a atividade Bug Hunter & TDD Calculator.
 
+**Autora:** Catarina Carrilho de Almeida | Ciência de Dados e Inteligência Artificial, SENAI CIMATEC | Data: 04/11/2026
+
+
 ## Resumo
 
 | ID | Título | Severidade | Status |
@@ -25,7 +28,7 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Descrição clara do bug:** A chamada à função principal está no nível do módulo, sem a proteção `if __name__ == "__main__":`. Qualquer `import Calculadora` dispara o menu e aguarda entrada do teclado. Com isso, nenhuma função pode ser importada para teste automatizado, pois o pytest interrompe a coleta com `OSError` ao tentar ler a entrada padrão durante o import. O defeito bloqueia toda a prática de TDD sobre o arquivo.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -61,7 +64,7 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Descrição clara do bug:** A função retorna `x + np.add(x, y)`, que equivale a `2x + y`. A operação mais básica da calculadora produz resultado incorreto para qualquer entrada diferente de x = 0.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -97,7 +100,7 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Descrição clara do bug:** A função executa `x / y` sem verificar se `y` é zero. O Python levanta `ZeroDivisionError` e o programa é interrompido com traceback, em vez de informar o erro ao usuário.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -133,7 +136,7 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Descrição clara do bug:** O laço começa em `i = 0`, pois `range(x+1)` gera valores de 0 a x. Na primeira iteração `fat *= 0` zera o acumulador, e todas as iterações seguintes mantêm o zero. O resultado é 0 para qualquer entrada positiva, e até para `fatorial(0)`, que deveria valer 1.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -177,7 +180,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** Não há validação do argumento. Para valores negativos o laço não executa nenhuma iteração e a função devolve 1, resultado sem sentido matemático, pois o fatorial não é definido para inteiros negativos.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -212,7 +215,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** O NumPy não possui `np.ln`. A função correta para logaritmo natural é `np.log`. Qualquer entrada válida provoca `AttributeError`.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -247,7 +250,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** A função chama `np.log`, que é o logaritmo natural. Para base 10 o correto é `np.log10`. O programa não acusa erro, mas devolve um valor numérico errado.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -282,7 +285,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** A validação usa `x < 0`, mas o logaritmo não é definido para zero. A mensagem de erro da própria função diz "não positivo", o que indica que a condição correta seria `x <= 0`, como já ocorre em `logaritmo_natural`. Para `x = 0` o programa devolve `-inf` e emite `RuntimeWarning`.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -317,7 +320,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** O menu oferece cosseno e tangente e o fluxo principal chama essas funções, mas elas nunca foram definidas no arquivo. A chamada de tangente ainda usa o parâmetro `radianos=False`, que também não existe em nenhuma definição.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -353,7 +356,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** O menu lista a opção 10 (Seno), mas não existe função `seno` nem ramo `elif escolha == '10'` no fluxo. A escolha cai no `else` e o programa responde "Operação inválida" para uma opção que aparece como válida.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -387,7 +390,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** As conversões de entrada não são protegidas. Texto no lugar de número gera `ValueError` e o programa termina com traceback. O fatorial usa `int`, então um valor decimal como `3.5` também gera o mesmo erro.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
@@ -422,7 +425,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Descrição clara do bug:** Casos como `0 ** -1` e base negativa com expoente fracionário (`(-8) ** 0.5`) não são validados. O NumPy emite `RuntimeWarning` e o programa exibe `inf` ou `nan` como se fossem resultados válidos, ao contrário da raiz quadrada, que trata o caso negativo.
 
-**Contexto:** Python 3.12.3, NumPy 2.5.4, pytest 9.2.0, Ubuntu 24.04, execução via terminal com `python Calculadora.py`.
+**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
 
 **Passo a passo para reproduzir:**
 
