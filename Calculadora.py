@@ -22,7 +22,7 @@ def raiz_quadrada(x):
 
 def fatorial(x):
     fat = 1
-    for i in range(x+1):
+    for i in range(1, x+1):
         fat *= i
     return fat
 
