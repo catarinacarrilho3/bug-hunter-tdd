@@ -1,78 +1,79 @@
 # Relatório de Bugs - Calculadora.py
 
-Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora científica), elaborado para a atividade Bug Hunter & TDD Calculator.
+Relatório dos defeitos encontrados no arquivo `Calculadora.py` (calculadora científica), feito para a atividade Bug Hunter & TDD Calculator.
 
 **Autora:** Catarina Carrilho de Almeida | Ciência de Dados e Inteligência Artificial, SENAI CIMATEC | Data: 04/11/2026
-
 
 ## Resumo
 
 | ID | Título | Severidade | Status |
 |---|---|---|---|
-| BUG-001 | Calculadora executa automaticamente ao importar o módulo | Média | Resolvido |
-| BUG-002 | Adição retorna o primeiro número somado duas vezes | Crítica | Não resolvido |
-| BUG-003 | Divisão por zero encerra o programa com exceção | Alta | Não resolvido |
+| BUG-001 | Calculadora executa sozinha ao importar o módulo | Média | Resolvido |
+| BUG-002 | Adição soma o primeiro número duas vezes | Crítica | Não resolvido |
+| BUG-003 | Divisão por zero derruba o programa | Alta | Não resolvido |
 | BUG-004 | Fatorial retorna sempre zero | Alta | Resolvido |
-| BUG-005 | Fatorial aceita número negativo e retorna 1 | Média | Não resolvido |
-| BUG-006 | Logaritmo natural usa função inexistente no NumPy | Alta | Não resolvido |
-| BUG-007 | Logaritmo base 10 calcula logaritmo natural | Alta | Não resolvido |
+| BUG-005 | Fatorial aceita número negativo | Média | Não resolvido |
+| BUG-006 | Logaritmo natural usa função que não existe | Alta | Não resolvido |
+| BUG-007 | Logaritmo base 10 calcula o logaritmo natural | Alta | Não resolvido |
 | BUG-008 | Logaritmo base 10 aceita zero | Média | Não resolvido |
 | BUG-009 | Funções cosseno e tangente não existem | Alta | Não resolvido |
-| BUG-010 | Opção Seno do menu não tem função nem tratamento | Média | Não resolvido |
-| BUG-011 | Entrada não numérica encerra o programa | Média | Não resolvido |
+| BUG-010 | Opção Seno do menu não funciona | Média | Não resolvido |
+| BUG-011 | Entrada que não é número encerra o programa | Média | Não resolvido |
 | BUG-012 | Potenciação sem tratamento de casos indefinidos | Baixa | Não resolvido |
 
-## BUG-001: Calculadora executa automaticamente ao importar o módulo
+Contexto: os prints e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`. Os arquivos `.log` da pasta `evidencias` foram gerados com a mesma calculadora em ambiente Linux (Ubuntu, Python 3.12), por isso algumas mensagens de erro podem ter pequenas diferenças de texto.
 
-**Localização do bug:** Calculadora.py, última linha (chamada `calculadora_cientifica()` fora de bloco `__main__`)
-
-**Descrição clara do bug:** A chamada à função principal está no nível do módulo, sem a proteção `if __name__ == "__main__":`. Qualquer `import Calculadora` dispara o menu e aguarda entrada do teclado. Com isso, nenhuma função pode ser importada para teste automatizado, pois o pytest interrompe a coleta com `OSError` ao tentar ler a entrada padrão durante o import. O defeito bloqueia toda a prática de TDD sobre o arquivo.
-
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
-
-**Passo a passo para reproduzir:**
-
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python -c "import Calculadora"` e observar que o menu aparece e o programa pede a operação.
-3. Criar um teste que importe qualquer função do módulo e executar `pytest`.
-
-**Consistência:** Ocorre sempre.
-
-**Resultado esperado:** O import deve apenas carregar as funções, sem executar o menu.
-
-**Resultado obtido:** O menu é exibido e o programa tenta ler a entrada; sem teclado interativo, termina com `EOFError: EOF when reading a line`. No pytest, a coleta é interrompida com `OSError: pytest: reading from stdin while output is captured`.
-
-**Evidências (logs de erro):** `evidencias/bug-001-import.log e evidencias/bug-001-pytest.log`
-
-**Severidade:** Média
-
-**Impacto:** Impede testes automatizados e reaproveitamento das funções em outros módulos.
-
-**Sugestão de correção:** Envolver a chamada final em `if __name__ == "__main__":`.
-
-**Data de identificação:** 04/11/2026
-
-**Status:** Resolvido
-
-**Correção aplicada:** a chamada final `calculadora_cientifica()` foi movida para dentro de `if __name__ == "__main__":`. A alteração foi feita como pré-requisito do TDD, já que os testes precisam importar o módulo sem disparar o menu. O comportamento ao executar `python Calculadora.py` permanece o mesmo.
 
 ---
 
-## BUG-002: Adição retorna o primeiro número somado duas vezes
+## BUG-001: Calculadora executa sozinha ao importar o módulo
 
-**Localização do bug:** Calculadora.py, função `adicao`
+**Localização do bug:** Calculadora.py, última linha (`calculadora_cientifica()` fora de `if __name__ == "__main__":`).
 
-**Descrição clara do bug:** A função retorna `x + np.add(x, y)`, que equivale a `2x + y`. A operação mais básica da calculadora produz resultado incorreto para qualquer entrada diferente de x = 0.
+**Descrição clara do bug:** A função principal é chamada direto no arquivo, sem a proteção do `__main__`. Por isso, qualquer `import Calculadora` abre o menu e fica esperando o teclado. Isso impede que os testes importem as funções, e o pytest para com erro antes de rodar qualquer teste.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14, pytest 9.2.0.
 
 **Passo a passo para reproduzir:**
 
 1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `1` no menu.
-4. Informar `2` como primeiro número.
-5. Informar `3` como segundo número.
+2. Executar `py -c "import Calculadora"` e ver o menu aparecer.
+3. Criar um teste que importe uma função do módulo e rodar `py -m pytest`.
+
+**Consistência:** Ocorre sempre.
+
+**Resultado esperado:** O import só carrega as funções, sem abrir o menu.
+
+**Resultado obtido:** O menu abre e o programa espera uma entrada. No pytest, a coleta é interrompida com `OSError: pytest: reading from stdin while output is captured`.
+
+**Evidências:** `evidencias/bug-001-import.log` e `evidencias/bug-001-pytest.log`
+
+**Severidade:** Média
+
+**Impacto:** Impede testes automatizados e o reaproveitamento das funções.
+
+**Sugestão de correção:** Colocar a chamada final dentro de `if __name__ == "__main__":`.
+
+**Data de identificação:** 04/11/2026
+
+**Status:** Resolvido. A chamada foi movida para dentro do `if __name__ == "__main__":` antes do TDD, porque os testes dependiam disso. O uso normal com `py Calculadora.py` continua igual.
+
+---
+
+## BUG-002: Adição soma o primeiro número duas vezes
+
+**Localização do bug:** Calculadora.py, função `adicao`.
+
+**Descrição clara do bug:** A função retorna `x + np.add(x, y)`, que dá `2x + y`. A soma, que é a operação mais básica, sai errada para qualquer valor de x diferente de zero.
+
+**Contexto:** Windows, Python 3.14, NumPy 2.5.4.
+
+**Passo a passo para reproduzir:**
+
+1. Executar `py Calculadora.py`.
+2. Digitar `1` no menu.
+3. Informar `2` como primeiro número.
+4. Informar `3` como segundo número.
 
 **Consistência:** Ocorre sempre.
 
@@ -80,13 +81,17 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Resultado obtido:** Resultado: 7.0
 
-**Evidências (logs de erro):** `evidencias/bug-002-adicao.log`
+**Evidências:** `evidencias/bug-002-adicao.log`
+
+![Print do BUG-002](evidencias/bug-002-print.png)
+
+*Figura 1. Terminal com a opção 1 (Adição), primeiro número 2 e segundo número 3. O resultado exibido é 7.0, quando o esperado era 5.0, o que confirma que a função `adicao` soma o primeiro número duas vezes.*
 
 **Severidade:** Crítica
 
-**Impacto:** Todo cálculo que dependa de soma fica errado, sem qualquer aviso ao usuário.
+**Impacto:** Todo cálculo que usa soma fica errado e o programa não avisa nada.
 
-**Sugestão de correção:** Retornar apenas `x + y` ou `np.add(x, y)`.
+**Sugestão de correção:** Retornar apenas `x + y`.
 
 **Data de identificação:** 04/11/2026
 
@@ -94,35 +99,38 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 ---
 
-## BUG-003: Divisão por zero encerra o programa com exceção
+## BUG-003: Divisão por zero derruba o programa
 
-**Localização do bug:** Calculadora.py, função `divisao`
+**Localização do bug:** Calculadora.py, função `divisao`.
 
-**Descrição clara do bug:** A função executa `x / y` sem verificar se `y` é zero. O Python levanta `ZeroDivisionError` e o programa é interrompido com traceback, em vez de informar o erro ao usuário.
+**Descrição clara do bug:** A função faz `x / y` sem checar se `y` é zero. O Python levanta `ZeroDivisionError` e o programa fecha com o erro na tela, em vez de avisar o usuário.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `4` no menu.
-4. Informar `10` como primeiro número.
-5. Informar `0` como segundo número.
+1. Executar `py Calculadora.py`.
+2. Digitar `4` no menu.
+3. Informar `10` como primeiro número.
+4. Informar `0` como segundo número.
 
 **Consistência:** Ocorre sempre.
 
-**Resultado esperado:** Mensagem de erro tratada, mantendo a calculadora em funcionamento.
+**Resultado esperado:** Mensagem de erro tratada, sem encerrar o programa.
 
-**Resultado obtido:** `ZeroDivisionError: float division by zero` e encerramento do programa.
+**Resultado obtido:** `ZeroDivisionError: division by zero` e o programa fecha.
 
-**Evidências (logs de erro):** `evidencias/bug-003-divisao.log`
+**Evidências:** `evidencias/bug-003-divisao.log`
+
+![Print do BUG-003](evidencias/bug-003-print.png)
+
+*Figura 2. Opção 4 (Divisão) com os números 10 e 0. O programa encerra com `ZeroDivisionError: division by zero` e aponta a linha `return x / y` da função `divisao`, sem nenhuma mensagem tratada para o usuário.*
 
 **Severidade:** Alta
 
-**Impacto:** Uma entrada comum derruba a aplicação inteira.
+**Impacto:** Uma entrada comum derruba a calculadora inteira.
 
-**Sugestão de correção:** Validar `y == 0` antes da divisão e levantar `ValueError` ou retornar mensagem de erro.
+**Sugestão de correção:** Verificar se `y == 0` antes de dividir e retornar uma mensagem de erro.
 
 **Data de identificação:** 04/11/2026
 
@@ -132,18 +140,17 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 ## BUG-004: Fatorial retorna sempre zero
 
-**Localização do bug:** Calculadora.py, função `fatorial` (laço `for i in range(x+1)`)
+**Localização do bug:** Calculadora.py, função `fatorial` (laço `for i in range(x+1)`).
 
-**Descrição clara do bug:** O laço começa em `i = 0`, pois `range(x+1)` gera valores de 0 a x. Na primeira iteração `fat *= 0` zera o acumulador, e todas as iterações seguintes mantêm o zero. O resultado é 0 para qualquer entrada positiva, e até para `fatorial(0)`, que deveria valer 1.
+**Descrição clara do bug:** O laço começa em `i = 0`, porque `range(x+1)` gera de 0 até x. Na primeira volta, `fat *= 0` zera o acumulador e ele continua zero até o fim. O resultado é 0 para qualquer número, até para `fatorial(0)`, que deveria ser 1.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14, NumPy 2.5.4.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `7` no menu.
-4. Informar `5` como número.
+1. Executar `py Calculadora.py` (na versão original, antes da correção).
+2. Digitar `7` no menu.
+3. Informar `5` como número.
 
 **Consistência:** Ocorre sempre.
 
@@ -151,43 +158,46 @@ Relatório de defeitos identificados no arquivo `Calculadora.py` (calculadora ci
 
 **Resultado obtido:** Resultado: 0
 
-**Evidências (logs de erro):** `evidencias/bug-004-fatorial.log`
+**Evidências:** `evidencias/bug-004-fatorial.log`
 
 **Severidade:** Alta
 
-**Impacto:** A operação de fatorial fica totalmente inutilizável.
+**Impacto:** A operação de fatorial fica inutilizável.
 
-**Sugestão de correção:** Iniciar o laço em 1: `range(1, x+1)`.
+**Sugestão de correção:** Começar o laço em 1, com `range(1, x+1)`.
 
 **Data de identificação:** 04/11/2026
 
 **Status:** Resolvido
 
-**Documentação da correção (TDD):** o bug foi tratado seguindo o ciclo Red, Green, Refactor.
+**Correção com TDD:** Este foi o bug escolhido para aplicar a metodologia TDD, seguindo o ciclo Red, Green e Refactor.
 
-1. Red: o arquivo `test_calculadora.py` foi criado com testes parametrizados para `fatorial` (valores 0, 1, 2, 5 e 10). Ao rodar `pytest -v`, os 5 testes falharam, confirmando o defeito (ver `evidencias/tdd-1-red.log`).
-2. Green: a correção mínima foi trocar `range(x+1)` por `range(1, x+1)`. Os 5 testes passaram (ver `evidencias/tdd-2-green.log`).
-3. Refactor: a variável `fat` foi renomeada para `resultado` e a função recebeu docstring, sem mudar o comportamento. Os testes continuaram passando.
-4. Verificação final: foram adicionados testes de regressão para `subtracao`, `multiplicacao` e `raiz_quadrada`, que não foram alteradas, e um teste marcado como `xfail` para o BUG-005, ainda não corrigido (ver `evidencias/tdd-3-final.log`).
+1. Red: foi criado o arquivo `test_calculadora.py` com testes para `fatorial` com as entradas 0, 1, 2, 5 e 10. Ao rodar `pytest -v`, os 5 testes falharam, confirmando o bug (`evidencias/tdd-1-red.log`).
+2. Green: a correção mínima foi trocar `range(x+1)` por `range(1, x+1)`. Depois disso, os 5 testes passaram (`evidencias/tdd-2-green.log`).
+3. Refactor: a variável `fat` foi renomeada para `resultado` e a função ganhou uma docstring, sem mudar o comportamento. Os testes continuaram passando.
+4. Verificação final: foram adicionados testes para `subtracao`, `multiplicacao` e `raiz_quadrada`, que não foram alteradas, para garantir que a correção não criou bugs novos. Também foi adicionado um teste marcado como `xfail` para o BUG-005, que ainda não foi corrigido. O resultado final foi 9 testes passando e 1 `xfailed` (`evidencias/tdd-3-final.log`).
 
-A correção resolve o bug porque o acumulador deixa de ser multiplicado por zero, e `fatorial(0)` passa a retornar 1, como define a matemática.
+![Testes passando depois da correção](evidencias/tdd-pytest-passando.png)
+
+*Figura 3. Execução de `pytest -v` depois da correção e da refatoração: 9 testes passaram e 1 foi marcado como `xfail` (BUG-005, ainda não corrigido). Isso confirma que a correção do fatorial não quebrou as outras funções.*
+
+A correção resolve o bug porque o acumulador deixa de ser multiplicado por zero, e `fatorial(0)` passa a retornar 1, como manda a definição matemática.
 
 ---
 
-## BUG-005: Fatorial aceita número negativo e retorna 1
+## BUG-005: Fatorial aceita número negativo
 
-**Localização do bug:** Calculadora.py, função `fatorial`
+**Localização do bug:** Calculadora.py, função `fatorial`.
 
-**Descrição clara do bug:** Não há validação do argumento. Para valores negativos o laço não executa nenhuma iteração e a função devolve 1, resultado sem sentido matemático, pois o fatorial não é definido para inteiros negativos.
+**Descrição clara do bug:** A função não valida o argumento. Com número negativo, o laço não roda e a função devolve 1, mas o fatorial não existe para negativos.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `7` no menu.
-4. Informar `-3` como número.
+1. Executar `py Calculadora.py`.
+2. Digitar `7` no menu.
+3. Informar `-3` como número.
 
 **Consistência:** Ocorre sempre.
 
@@ -195,42 +205,49 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Resultado obtido:** Resultado: 1
 
-**Evidências (logs de erro):** `evidencias/bug-005-fatorial-negativo.log`
+**Evidências:** `evidencias/bug-005-fatorial-negativo.log`
+
+![Print do BUG-005](evidencias/bug-005-print.png)
+
+*Figura 4. Opção 7 (Fatorial) com o número -3. O programa devolve `Resultado: 1`, mas o fatorial não existe para números negativos, então a entrada deveria ser recusada.*
 
 **Severidade:** Média
 
-**Impacto:** O usuário recebe um resultado incorreto como se fosse válido.
+**Impacto:** O usuário recebe um resultado inválido como se estivesse certo.
 
 **Sugestão de correção:** Levantar `ValueError` quando `x < 0`.
 
 **Data de identificação:** 04/11/2026
 
-**Status:** Não resolvido
+**Status:** Não resolvido (registrado como `xfail` em `test_calculadora.py`)
 
 ---
 
-## BUG-006: Logaritmo natural usa função inexistente no NumPy
+## BUG-006: Logaritmo natural usa função que não existe
 
-**Localização do bug:** Calculadora.py, função `logaritmo_natural` (`np.ln`)
+**Localização do bug:** Calculadora.py, função `logaritmo_natural` (`np.ln`).
 
-**Descrição clara do bug:** O NumPy não possui `np.ln`. A função correta para logaritmo natural é `np.log`. Qualquer entrada válida provoca `AttributeError`.
+**Descrição clara do bug:** O NumPy não tem `np.ln`. A função certa para o logaritmo natural é `np.log`. Qualquer número positivo gera `AttributeError`.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14, NumPy 2.5.4.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `8` no menu.
-4. Informar `2.718` como número.
+1. Executar `py Calculadora.py`.
+2. Digitar `8` no menu.
+3. Informar `2.718` como número.
 
-**Consistência:** Ocorre sempre para entradas positivas.
+**Consistência:** Ocorre sempre para números positivos.
 
-**Resultado esperado:** Resultado aproximado de 1.0
+**Resultado esperado:** Resultado próximo de 1.0
 
-**Resultado obtido:** `AttributeError: module 'numpy' has no attribute 'ln'` e encerramento do programa.
+**Resultado obtido:** `AttributeError: module 'numpy' has no attribute 'ln'` e o programa fecha.
 
-**Evidências (logs de erro):** `evidencias/bug-006-ln.log`
+**Evidências:** `evidencias/bug-006-ln.log`
+
+![Print do BUG-006](evidencias/bug-006-print.png)
+
+*Figura 5. Opção 8 (Logaritmo Natural) com o número 2.718. O traceback termina em `AttributeError: module 'numpy' has no attribute 'ln'` e mostra a linha `np.ln(x)` da função `logaritmo_natural`.*
 
 **Severidade:** Alta
 
@@ -244,20 +261,19 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ---
 
-## BUG-007: Logaritmo base 10 calcula logaritmo natural
+## BUG-007: Logaritmo base 10 calcula o logaritmo natural
 
-**Localização do bug:** Calculadora.py, função `logaritmo_base10` (`np.log`)
+**Localização do bug:** Calculadora.py, função `logaritmo_base10` (`np.log`).
 
-**Descrição clara do bug:** A função chama `np.log`, que é o logaritmo natural. Para base 10 o correto é `np.log10`. O programa não acusa erro, mas devolve um valor numérico errado.
+**Descrição clara do bug:** A função usa `np.log`, que é o logaritmo natural. Para a base 10 o certo é `np.log10`. Não dá erro, mas o valor sai errado.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14, NumPy 2.5.4.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `9` no menu.
-4. Informar `100` como número.
+1. Executar `py Calculadora.py`.
+2. Digitar `9` no menu.
+3. Informar `100` como número.
 
 **Consistência:** Ocorre sempre.
 
@@ -265,11 +281,15 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 **Resultado obtido:** Resultado: 4.605170185988092
 
-**Evidências (logs de erro):** `evidencias/bug-007-log10.log`
+**Evidências:** `evidencias/bug-007-log10.log`
+
+![Print do BUG-007](evidencias/bug-007-print.png)
+
+*Figura 6. Opção 9 (Logaritmo Base 10) com o número 100. O resultado é 4.605170185988092, que é o logaritmo natural de 100, e não 2.0, valor esperado para a base 10.*
 
 **Severidade:** Alta
 
-**Impacto:** Resultado silenciosamente incorreto, difícil de perceber.
+**Impacto:** O resultado é errado e difícil de perceber, porque o programa não mostra erro.
 
 **Sugestão de correção:** Trocar `np.log(x)` por `np.log10(x)`.
 
@@ -281,32 +301,35 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ## BUG-008: Logaritmo base 10 aceita zero
 
-**Localização do bug:** Calculadora.py, função `logaritmo_base10` (condição `x < 0`)
+**Localização do bug:** Calculadora.py, função `logaritmo_base10` (condição `x < 0`).
 
-**Descrição clara do bug:** A validação usa `x < 0`, mas o logaritmo não é definido para zero. A mensagem de erro da própria função diz "não positivo", o que indica que a condição correta seria `x <= 0`, como já ocorre em `logaritmo_natural`. Para `x = 0` o programa devolve `-inf` e emite `RuntimeWarning`.
+**Descrição clara do bug:** A validação usa `x < 0`, mas o logaritmo também não existe para zero. A própria mensagem de erro fala em "número não positivo", e o `logaritmo_natural` já usa `x <= 0`. Com `x = 0`, o programa mostra `-inf` e um aviso do NumPy.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14, NumPy 2.5.4.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `9` no menu.
-4. Informar `0` como número.
+1. Executar `py Calculadora.py`.
+2. Digitar `9` no menu.
+3. Informar `0` como número.
 
 **Consistência:** Ocorre sempre.
 
-**Resultado esperado:** Mensagem: "Erro: Logaritmo de número não positivo"
+**Resultado esperado:** Mensagem "Erro: Logaritmo de número não positivo".
 
 **Resultado obtido:** `RuntimeWarning: divide by zero encountered in log` e Resultado: -inf
 
-**Evidências (logs de erro):** `evidencias/bug-008-log10-zero.log`
+**Evidências:** `evidencias/bug-008-log10-zero.log`
+
+![Print do BUG-008](evidencias/bug-008-print.png)
+
+*Figura 7. Opção 9 (Logaritmo Base 10) com o número 0. O NumPy emite um aviso e o programa mostra `Resultado: -inf`, quando deveria exibir a mensagem de erro para número não positivo.*
 
 **Severidade:** Média
 
-**Impacto:** Valor inválido é exibido como resultado e a validação fica inconsistente com a outra função de logaritmo.
+**Impacto:** Um valor inválido aparece como resultado, e a validação fica diferente da outra função de logaritmo.
 
-**Sugestão de correção:** Alterar a condição para `x <= 0`.
+**Sugestão de correção:** Trocar a condição para `x <= 0`.
 
 **Data de identificação:** 04/11/2026
 
@@ -316,33 +339,36 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ## BUG-009: Funções cosseno e tangente não existem
 
-**Localização do bug:** Calculadora.py, `calculadora_cientifica` (opções 11 e 12 chamam `cosseno` e `tangente`)
+**Localização do bug:** Calculadora.py, função `calculadora_cientifica` (opções 11 e 12 chamam `cosseno` e `tangente`).
 
-**Descrição clara do bug:** O menu oferece cosseno e tangente e o fluxo principal chama essas funções, mas elas nunca foram definidas no arquivo. A chamada de tangente ainda usa o parâmetro `radianos=False`, que também não existe em nenhuma definição.
+**Descrição clara do bug:** O menu oferece cosseno e tangente e o fluxo chama as duas funções, mas elas nunca foram definidas no arquivo. A chamada da tangente ainda usa um parâmetro `radianos=False` que também não existe em lugar nenhum.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `11` no menu.
-4. Informar `60` como ângulo em graus.
-5. Repetir com a opção `12` e o ângulo `45`.
+1. Executar `py Calculadora.py`.
+2. Digitar `11` no menu.
+3. Informar `60` como ângulo em graus.
+4. Repetir com a opção `12` e o ângulo `45`.
 
 **Consistência:** Ocorre sempre.
 
-**Resultado esperado:** Cosseno de 60° igual a 0.5 e tangente de 45° igual a 1.0 (aproximadamente).
+**Resultado esperado:** Cosseno de 60° próximo de 0.5 e tangente de 45° próxima de 1.0.
 
 **Resultado obtido:** `NameError: name 'cosseno' is not defined` e `NameError: name 'tangente' is not defined`.
 
-**Evidências (logs de erro):** `evidencias/bug-009-cosseno.log e evidencias/bug-009-tangente.log`
+**Evidências:** `evidencias/bug-009-cosseno.log` e `evidencias/bug-009-tangente.log`
+
+![Print do BUG-009](evidencias/bug-009-print.png)
+
+*Figura 8. Opção 11 (Cosseno) com 60 graus. O programa encerra com `NameError: name 'cosseno' is not defined`, porque a função nunca foi criada. A opção 12 (Tangente) falha da mesma forma, como mostra o log desse bug.*
 
 **Severidade:** Alta
 
-**Impacto:** Duas operações anunciadas no menu derrubam o programa.
+**Impacto:** Duas operações do menu derrubam o programa.
 
-**Sugestão de correção:** Implementar `cosseno(x)` e `tangente(x, radianos=True)` com `np.cos`, `np.tan` e `np.radians`.
+**Sugestão de correção:** Criar `cosseno(x)` e `tangente(x, radianos=True)` usando `np.cos`, `np.tan` e `np.radians`.
 
 **Data de identificação:** 04/11/2026
 
@@ -350,33 +376,36 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ---
 
-## BUG-010: Opção Seno do menu não tem função nem tratamento
+## BUG-010: Opção Seno do menu não funciona
 
-**Localização do bug:** Calculadora.py, `menu` e `calculadora_cientifica` (opção 10)
+**Localização do bug:** Calculadora.py, funções `menu` e `calculadora_cientifica` (opção 10).
 
-**Descrição clara do bug:** O menu lista a opção 10 (Seno), mas não existe função `seno` nem ramo `elif escolha == '10'` no fluxo. A escolha cai no `else` e o programa responde "Operação inválida" para uma opção que aparece como válida.
+**Descrição clara do bug:** O menu mostra a opção 10 (Seno), mas não existe a função `seno` nem um `elif escolha == '10'` no fluxo. A escolha cai no `else` e o programa responde "Operação inválida" para uma opção que aparece no menu.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `10` no menu.
+1. Executar `py Calculadora.py`.
+2. Digitar `10` no menu.
 
 **Consistência:** Ocorre sempre.
 
-**Resultado esperado:** Solicitar o ângulo em graus e exibir o seno.
+**Resultado esperado:** O programa pedir o ângulo em graus e mostrar o seno.
 
-**Resultado obtido:** Operação inválida. Tente novamente.
+**Resultado obtido:** "Operação inválida. Tente novamente."
 
-**Evidências (logs de erro):** `evidencias/bug-010-seno.log`
+**Evidências:** `evidencias/bug-010-seno.log`
+
+![Print do BUG-010](evidencias/bug-010-print.png)
+
+*Figura 9. Opção 10 (Seno). Mesmo aparecendo no menu, a escolha cai no `else` e o programa responde `Operação inválida. Tente novamente.`*
 
 **Severidade:** Média
 
-**Impacto:** Funcionalidade anunciada fica inacessível e a mensagem confunde o usuário.
+**Impacto:** Uma função que aparece no menu não pode ser usada, e a mensagem confunde o usuário.
 
-**Sugestão de correção:** Implementar `seno(x)` e adicionar o ramo da opção 10 no fluxo.
+**Sugestão de correção:** Criar `seno(x)` e adicionar a opção 10 no fluxo principal.
 
 **Data de identificação:** 04/11/2026
 
@@ -384,34 +413,37 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ---
 
-## BUG-011: Entrada não numérica encerra o programa
+## BUG-011: Entrada que não é número encerra o programa
 
-**Localização do bug:** Calculadora.py, `calculadora_cientifica` (conversões `float(input(...))` e `int(input(...))`)
+**Localização do bug:** Calculadora.py, função `calculadora_cientifica` (conversões com `float(input(...))` e `int(input(...))`).
 
-**Descrição clara do bug:** As conversões de entrada não são protegidas. Texto no lugar de número gera `ValueError` e o programa termina com traceback. O fatorial usa `int`, então um valor decimal como `3.5` também gera o mesmo erro.
+**Descrição clara do bug:** As conversões da entrada não têm tratamento de erro. Se o usuário digitar texto no lugar de número, o programa fecha com `ValueError`. No fatorial, que usa `int`, um número decimal como `3.5` gera o mesmo erro.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `1` no menu.
-4. Informar `abc` como primeiro número.
+1. Executar `py Calculadora.py`.
+2. Digitar `1` no menu.
+3. Informar `abc` como primeiro número.
 
 **Consistência:** Ocorre sempre.
 
-**Resultado esperado:** Mensagem pedindo um número válido, sem encerrar o programa.
+**Resultado esperado:** Mensagem pedindo um número válido, sem fechar o programa.
 
 **Resultado obtido:** `ValueError: could not convert string to float: 'abc'`.
 
-**Evidências (logs de erro):** `evidencias/bug-011-entrada-invalida.log`
+**Evidências:** `evidencias/bug-011-entrada-invalida.log`
+
+![Print do BUG-011](evidencias/bug-011-print.png)
+
+*Figura 10. Opção 1 (Adição) com `abc` como primeiro número. O programa fecha com `ValueError: could not convert string to float: 'abc'`, sem pedir um número válido.*
 
 **Severidade:** Média
 
-**Impacto:** Erro comum de digitação derruba a aplicação.
+**Impacto:** Um erro comum de digitação derruba a calculadora.
 
-**Sugestão de correção:** Envolver as conversões em `try/except ValueError`.
+**Sugestão de correção:** Usar `try/except ValueError` nas conversões.
 
 **Data de identificação:** 04/11/2026
 
@@ -421,38 +453,37 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ## BUG-012: Potenciação sem tratamento de casos indefinidos
 
-**Localização do bug:** Calculadora.py, função `potencia`
+**Localização do bug:** Calculadora.py, função `potencia`.
 
-**Descrição clara do bug:** Casos como `0 ** -1` e base negativa com expoente fracionário (`(-8) ** 0.5`) não são validados. O NumPy emite `RuntimeWarning` e o programa exibe `inf` ou `nan` como se fossem resultados válidos, ao contrário da raiz quadrada, que trata o caso negativo.
+**Descrição clara do bug:** Casos como `0 ** -1` e base negativa com expoente fracionário, como `(-8) ** 0.5`, não são validados. O NumPy gera `RuntimeWarning` e o programa mostra `inf` ou `nan` como se fossem resultados normais. Já a raiz quadrada trata o caso negativo.
 
-**Contexto:** Python 3.14, NumPy 2.5.4, pytest 9.2.0, Windows, execução via terminal do VS Code com `py Calculadora.py`.
+**Contexto:** Windows, Python 3.14, NumPy 2.5.4.
 
 **Passo a passo para reproduzir:**
 
-1. Abrir o terminal na pasta do projeto.
-2. Executar `python Calculadora.py`.
-3. Digitar `5` no menu.
-4. Informar `0` como primeiro número.
-5. Informar `-1` como segundo número.
-6. Repetir com `-8` e `0.5`.
+1. Executar `py Calculadora.py`.
+2. Digitar `5` no menu.
+3. Informar `0` como primeiro número e `-1` como segundo.
+4. Repetir com `-8` e `0.5`.
 
 **Consistência:** Ocorre sempre.
 
 **Resultado esperado:** Mensagem de erro para operação indefinida.
 
-**Resultado obtido:** `RuntimeWarning` seguido de Resultado: inf (primeiro caso) e Resultado: nan (segundo caso).
+**Resultado obtido:** `RuntimeWarning` e Resultado: inf (primeiro caso) e Resultado: nan (segundo caso).
 
-**Evidências (logs de erro):** `evidencias/bug-012-potencia-zero.log e evidencias/bug-012-potencia-neg.log`
+**Evidências:** `evidencias/bug-012-potencia-zero.log` e `evidencias/bug-012-potencia-neg.log`
+
+![Print do BUG-012](evidencias/bug-012-print.png)
+
+*Figura 11. Opção 5 (Potenciação) com base 0 e expoente -1. O NumPy emite um aviso e o programa mostra `Resultado: inf`, sem informar que a operação é indefinida.*
 
 **Severidade:** Baixa
 
-**Impacto:** Valores especiais de ponto flutuante são exibidos sem explicação.
+**Impacto:** Valores especiais do ponto flutuante aparecem sem explicação.
 
-**Sugestão de correção:** Validar os casos indefinidos antes de chamar `np.power`.
+**Sugestão de correção:** Validar esses casos antes de chamar `np.power`.
 
 **Data de identificação:** 04/11/2026
 
 **Status:** Não resolvido
-
----
-
