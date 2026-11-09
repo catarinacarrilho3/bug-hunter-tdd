@@ -475,7 +475,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-012](evidencias/bug-012-print.png)
 
-*Figura 11. A potenciação de 0 por -1 mostra `inf` e a de -8 por 0,5 mostra `nan`, ambos sem mensagem de erro.*
+*Figura 11. A potenciação de 0 por -1 mostra `inf` e emite um aviso do NumPy, sem mensagem de erro. O caso de -8 por 0,5, que resulta em `nan`, está no log `bug-012-potencia-neg.log`.*
 
 **Severidade:** Baixa
 
