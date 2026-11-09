@@ -1,5 +1,5 @@
 # Entradas digitadas (em ordem): 11 | 60 | n
-$ python Calculadora.py
+$ py Calculadora.py
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -18,6 +18,7 @@ Escolha a operação que deseja realizar:
 Digite o número da operação: Digite o ângulo em graus: Traceback (most recent call last):
   File "Calculadora.py", line 108, in <module>
     calculadora_cientifica()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
   File "Calculadora.py", line 95, in calculadora_cientifica
     print("Resultado:", cosseno(x))
                         ^^^^^^^

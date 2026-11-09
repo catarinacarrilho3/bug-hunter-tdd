@@ -1,6 +1,5 @@
-$ pytest -v
-============================= test session starts ==============================
-plugins: platformdirs-4.13.0
+$ py -m pytest -v
+============================= test session starts =============================
 collecting ... collected 5 items
 
 test_calculadora.py::test_fatorial_valores_conhecidos[0-1] PASSED        [ 20%]
@@ -9,4 +8,4 @@ test_calculadora.py::test_fatorial_valores_conhecidos[2-2] PASSED        [ 60%]
 test_calculadora.py::test_fatorial_valores_conhecidos[5-120] PASSED      [ 80%]
 test_calculadora.py::test_fatorial_valores_conhecidos[10-3628800] PASSED [100%]
 
-============================== 5 passed in 0.06s ===============================
+============================== 5 passed in 0.13s ==============================

@@ -1,6 +1,5 @@
-$ pytest -v
-============================= test session starts ==============================
-plugins: platformdirs-4.13.0
+$ py -m pytest -v
+============================= test session starts =============================
 collecting ... collected 10 items
 
 test_calculadora.py::test_fatorial_valores_conhecidos[0-1] PASSED        [ 10%]
@@ -14,4 +13,4 @@ test_calculadora.py::test_multiplicacao PASSED                           [ 80%]
 test_calculadora.py::test_raiz_quadrada_positiva PASSED                  [ 90%]
 test_calculadora.py::test_raiz_quadrada_negativa_retorna_erro PASSED     [100%]
 
-========================= 9 passed, 1 xfailed in 0.07s =========================
+======================== 9 passed, 1 xfailed in 0.21s =========================

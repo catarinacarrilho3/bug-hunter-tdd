@@ -1,4 +1,4 @@
-$ python -c "import Calculadora"
+$ py -c "import Calculadora"
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -16,9 +16,11 @@ Escolha a operação que deseja realizar:
 12. Tangente
 Digite o número da operação: Traceback (most recent call last):
   File "<string>", line 1, in <module>
+    import Calculadora
   File "Calculadora.py", line 108, in <module>
     calculadora_cientifica()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
   File "Calculadora.py", line 58, in calculadora_cientifica
     escolha = input("Digite o número da operação: ")
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 EOFError: EOF when reading a line

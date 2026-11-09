@@ -1,5 +1,5 @@
 # Entradas digitadas (em ordem): 5 | -8 | 0.5 | n
-$ python Calculadora.py
+$ py Calculadora.py
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -15,7 +15,6 @@ Escolha a operação que deseja realizar:
 10. Seno
 11. Cosseno
 12. Tangente
-Digite o número da operação: Digite o primeiro número: Digite o segundo número: Calculadora.py:16: RuntimeWarning: invalid value encountered in power
+Digite o número da operação: Digite o primeiro número: Digite o segundo número: Resultado: nan
+Deseja realizar outra operação? (s/n): Calculadora.py:16: RuntimeWarning: invalid value encountered in power
   return np.power(x, y)
-Resultado: nan
-Deseja realizar outra operação? (s/n): 

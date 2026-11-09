@@ -14,6 +14,8 @@ pytest -v                 # executa os testes
 
 > **Nota sobre o framework de testes:** o enunciado da atividade cita `unittest` na lista de materiais e `pytest` nas etapas de estudo e prática. Optei pelo `pytest`, que é o framework indicado no passo a passo da atividade e permite escrever os testes de forma mais simples, com `assert` e `@pytest.mark.parametrize`. O `pytest` também executa testes escritos em `unittest`, então a escolha não limita a verificação.
 
+os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`.
+
 ## Estrutura do repositório
 
 ```
@@ -31,7 +33,7 @@ O defeito escolhido para o TDD foi o BUG-004 (fatorial retorna sempre zero). O c
 
 
 ## Reflexão sobre o processo com Scrum
-Mesmo sendo uma atividade individual, deu para organizar o trabalho como no Scrum. O relatório de bugs fez o papel de Product Backlog: cada defeito virou um item com severidade, e isso ajudou a decidir por onde começar. A soma errada, por exemplo, é crítica porque afeta a operação mais básica, enquanto os casos de potência indefinida pesam menos. A sprint teve uma meta simples, que era corrigir um bug de ponta a ponta com TDD, e o resultado entregue foi o teste, a correção e a documentação no repositório.
+Mesmo a atividade sendo uma atividade individual, o trabalho seguiu a lógica do Scrum. O relatório de bugs funcionou como o Product Backlog, e cada defeito encontrado virou um item com a sua severidade, que foi o critério para definir o que era mais importante. A adição errada, por exemplo, é crítica porque afeta a operação mais básica da calculadora, enquanto os casos indefinidos da potenciação são um problema menor. A meta da sprint foi curta, corrigir um bug do início ao fim usando TDD, e no fim ficaram entregues o teste, a correção e a documentação no repositório.
 
 O BUG-001 virou um impedimento. Para aplicar o TDD no fatorial, os testes precisavam importar o arquivo, mas a calculadora abria o menu logo no import e o pytest travava. Foi preciso resolver isso antes, colocando a chamada dentro do `__main__`, e só depois o ciclo de teste, correção e refatoração pôde andar. A definição de pronto também ajudou: o bug só foi considerado resolvido depois de rodar todos os testes e atualizar o relatório.
 

@@ -1,5 +1,5 @@
 # Entradas digitadas (em ordem): 9 | 0 | n
-$ python Calculadora.py
+$ py Calculadora.py
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -15,7 +15,6 @@ Escolha a operação que deseja realizar:
 10. Seno
 11. Cosseno
 12. Tangente
-Digite o número da operação: Digite o número: Calculadora.py:37: RuntimeWarning: divide by zero encountered in log
+Digite o número da operação: Digite o número: Resultado: -inf
+Deseja realizar outra operação? (s/n): Calculadora.py:37: RuntimeWarning: divide by zero encountered in log
   return np.log(x)
-Resultado: -inf
-Deseja realizar outra operação? (s/n): 

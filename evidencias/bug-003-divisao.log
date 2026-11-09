@@ -1,5 +1,5 @@
 # Entradas digitadas (em ordem): 4 | 10 | 0 | n
-$ python Calculadora.py
+$ py Calculadora.py
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -18,10 +18,11 @@ Escolha a operação que deseja realizar:
 Digite o número da operação: Digite o primeiro número: Digite o segundo número: Traceback (most recent call last):
   File "Calculadora.py", line 108, in <module>
     calculadora_cientifica()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
   File "Calculadora.py", line 73, in calculadora_cientifica
     print("Resultado:", divisao(x, y))
-                        ^^^^^^^^^^^^^
+                        ~~~~~~~^^^^^^
   File "Calculadora.py", line 13, in divisao
     return x / y
            ~~^~~
-ZeroDivisionError: float division by zero
+ZeroDivisionError: division by zero

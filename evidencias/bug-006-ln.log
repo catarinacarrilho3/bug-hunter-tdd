@@ -1,5 +1,5 @@
 # Entradas digitadas (em ordem): 8 | 2.718 | n
-$ python Calculadora.py
+$ py Calculadora.py
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -18,12 +18,13 @@ Escolha a operação que deseja realizar:
 Digite o número da operação: Digite o número: Traceback (most recent call last):
   File "Calculadora.py", line 108, in <module>
     calculadora_cientifica()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
   File "Calculadora.py", line 87, in calculadora_cientifica
     print("Resultado:", logaritmo_natural(x))
-                        ^^^^^^^^^^^^^^^^^^^^
+                        ~~~~~~~~~~~~~~~~~^^^
   File "Calculadora.py", line 32, in logaritmo_natural
     return np.ln(x)
            ^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/numpy/__init__.py", line 769, in __getattr__
+  File "C:\Users\catar\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\numpy\__init__.py", line 782, in __getattr__
     raise AttributeError(f"module {__name__!r} has no attribute {attr!r}")
 AttributeError: module 'numpy' has no attribute 'ln'

@@ -1,18 +1,18 @@
-$ pytest -q   # Calculadora.py original, sem proteção __main__
+$ py -m pytest -q   # Calculadora.py original, sem proteção __main__
 
-==================================== ERRORS ====================================
-_____________________ ERROR collecting test_calculadora.py _____________________
+=================================== ERRORS ====================================
+____________________ ERROR collecting test_calculadora.py _____________________
 test_calculadora.py:3: in <module>
-    from Calculadora import fatorial
+    from Calculadora import fatorial, multiplicacao, raiz_quadrada, subtracao
 Calculadora.py:108: in <module>
     calculadora_cientifica()
 Calculadora.py:58: in calculadora_cientifica
     escolha = input("Digite o número da operação: ")
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-/usr/local/lib/python3.12/dist-packages/_pytest/capture.py:229: in read
+..\..\Python\pythoncore-3.14-64\Lib\site-packages\_pytest\capture.py:229: in read
     raise OSError(
 E   OSError: pytest: reading from stdin while output is captured!  Consider using `-s`.
-------------------------------- Captured stdout --------------------------------
+------------------------------- Captured stdout -------------------------------
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
@@ -29,7 +29,7 @@ Escolha a operação que deseja realizar:
 11. Cosseno
 12. Tangente
 Digite o número da operação: 
-=========================== short test summary info ============================
+=========================== short test summary info ===========================
 ERROR test_calculadora.py - OSError: pytest: reading from stdin while output ...
-!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-1 error in 0.12s
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.30s

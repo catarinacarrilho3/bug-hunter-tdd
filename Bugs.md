@@ -21,8 +21,7 @@ Relatório dos defeitos encontrados no arquivo `Calculadora.py`.
 | BUG-011 | Entrada que não é número encerra o programa | Média | Não resolvido |
 | BUG-012 | Potenciação sem tratamento de casos indefinidos | Baixa | Não resolvido |
 
-Contexto: os prints e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`. Os arquivos `.log` da pasta `evidencias` foram gerados com a mesma calculadora em ambiente Linux (Ubuntu, Python 3.12), por isso algumas mensagens de erro podem ter pequenas diferenças de texto.
-
+Vale falar que os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`.
 
 ---
 
@@ -85,7 +84,7 @@ Contexto: os prints e os testes com pytest foram feitos em Windows, Python 3.14,
 
 ![Print do BUG-002](evidencias/bug-002-print.png)
 
-*Figura 1. Terminal com a opção 1 (Adição), primeiro número 2 e segundo número 3. O resultado exibido é 7.0, quando o esperado era 5.0, o que confirma que a função `adicao` soma o primeiro número duas vezes.*
+*Figura 1. O resultado exibido é 7.0, quando o esperado era 5.0, o que confirma que a função `adicao` soma o primeiro número duas vezes.*
 
 **Severidade:** Crítica
 
@@ -124,7 +123,7 @@ Contexto: os prints e os testes com pytest foram feitos em Windows, Python 3.14,
 
 ![Print do BUG-003](evidencias/bug-003-print.png)
 
-*Figura 2. Opção 4 (Divisão) com os números 10 e 0. O programa encerra com `ZeroDivisionError: division by zero` e aponta a linha `return x / y` da função `divisao`, sem nenhuma mensagem tratada para o usuário.*
+*Figura 2. O programa encerra com `ZeroDivisionError: division by zero` e aponta a linha `return x / y` da função `divisao`, sem nenhuma mensagem tratada para o usuário.*
 
 **Severidade:** Alta
 
@@ -179,7 +178,7 @@ Contexto: os prints e os testes com pytest foram feitos em Windows, Python 3.14,
 
 ![Testes passando depois da correção](evidencias/tdd-pytest-passando.png)
 
-*Figura 3. Execução de `pytest -v` depois da correção e da refatoração: 9 testes passaram e 1 foi marcado como `xfail` (BUG-005, ainda não corrigido). Isso confirma que a correção do fatorial não quebrou as outras funções.*
+*Figura 3.
 
 A correção resolve o bug porque o acumulador deixa de ser multiplicado por zero, e `fatorial(0)` passa a retornar 1, como manda a definição matemática.
 
@@ -209,7 +208,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-005](evidencias/bug-005-print.png)
 
-*Figura 4. Opção 7 (Fatorial) com o número -3. O programa devolve `Resultado: 1`, mas o fatorial não existe para números negativos, então a entrada deveria ser recusada.*
+*Figura 4.  o fatorial não existe para números negativos, então a entrada deveria ser recusada.*
 
 **Severidade:** Média
 
@@ -247,7 +246,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-006](evidencias/bug-006-print.png)
 
-*Figura 5. Opção 8 (Logaritmo Natural) com o número 2.718. O traceback termina em `AttributeError: module 'numpy' has no attribute 'ln'` e mostra a linha `np.ln(x)` da função `logaritmo_natural`.*
+*Figura 5.O traceback termina em `AttributeError: module 'numpy' has no attribute 'ln'` e mostra a linha `np.ln(x)` da função `logaritmo_natural`.*
 
 **Severidade:** Alta
 
@@ -285,7 +284,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-007](evidencias/bug-007-print.png)
 
-*Figura 6. Opção 9 (Logaritmo Base 10) com o número 100. O resultado é 4.605170185988092, que é o logaritmo natural de 100, e não 2.0, valor esperado para a base 10.*
+*Figura 6. O resultado 4.605170185988092 é o logaritmo natural de 100, e não 2.0, valor esperado para a base 10.*
 
 **Severidade:** Alta
 
@@ -323,7 +322,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-008](evidencias/bug-008-print.png)
 
-*Figura 7. Opção 9 (Logaritmo Base 10) com o número 0. O NumPy emite um aviso e o programa mostra `Resultado: -inf`, quando deveria exibir a mensagem de erro para número não positivo.*
+*Figura 7. O NumPy emite um aviso e o programa mostra `Resultado: -inf`, quando deveria exibir a mensagem de erro para número não positivo.*
 
 **Severidade:** Média
 
@@ -362,7 +361,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-009](evidencias/bug-009-print.png)
 
-*Figura 8. Opção 11 (Cosseno) com 60 graus. O programa encerra com `NameError: name 'cosseno' is not defined`, porque a função nunca foi criada. A opção 12 (Tangente) falha da mesma forma, como mostra o log desse bug.*
+*Figura 8. O programa encerra com `NameError: name 'cosseno' is not defined`, porque a função nunca foi criada. A opção 12 (Tangente) falha da mesma forma, como mostra o log desse bug.*
 
 **Severidade:** Alta
 
@@ -399,7 +398,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-010](evidencias/bug-010-print.png)
 
-*Figura 9. Opção 10 (Seno). Mesmo aparecendo no menu, a escolha cai no `else` e o programa responde `Operação inválida. Tente novamente.`*
+*Figura 9.  Mesmo aparecendo no menu, a escolha cai no `else` e o programa responde `Operação inválida. Tente novamente.`*
 
 **Severidade:** Média
 
@@ -437,7 +436,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-011](evidencias/bug-011-print.png)
 
-*Figura 10. Opção 1 (Adição) com `abc` como primeiro número. O programa fecha com `ValueError: could not convert string to float: 'abc'`, sem pedir um número válido.*
+*Figura 10.
 
 **Severidade:** Média
 
@@ -476,7 +475,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-012](evidencias/bug-012-print.png)
 
-*Figura 11. Opção 5 (Potenciação) com base 0 e expoente -1. O NumPy emite um aviso e o programa mostra `Resultado: inf`, sem informar que a operação é indefinida.*
+*Figura 11. 
 
 **Severidade:** Baixa
 

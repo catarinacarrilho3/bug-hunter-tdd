@@ -1,6 +1,5 @@
-$ pytest -v
-============================= test session starts ==============================
-plugins: platformdirs-4.13.0
+$ py -m pytest -v
+============================= test session starts =============================
 collecting ... collected 5 items
 
 test_calculadora.py::test_fatorial_valores_conhecidos[0-1] FAILED        [ 20%]
@@ -9,8 +8,8 @@ test_calculadora.py::test_fatorial_valores_conhecidos[2-2] FAILED        [ 60%]
 test_calculadora.py::test_fatorial_valores_conhecidos[5-120] FAILED      [ 80%]
 test_calculadora.py::test_fatorial_valores_conhecidos[10-3628800] FAILED [100%]
 
-=================================== FAILURES ===================================
-____________________ test_fatorial_valores_conhecidos[0-1] _____________________
+================================== FAILURES ===================================
+____________________ test_fatorial_valores_conhecidos[0-1] ____________________
 
 n = 0, esperado = 1
 
@@ -30,7 +29,7 @@ E       assert 0 == 1
 E        +  where 0 = fatorial(0)
 
 test_calculadora.py:17: AssertionError
-____________________ test_fatorial_valores_conhecidos[1-1] _____________________
+____________________ test_fatorial_valores_conhecidos[1-1] ____________________
 
 n = 1, esperado = 1
 
@@ -50,7 +49,7 @@ E       assert 0 == 1
 E        +  where 0 = fatorial(1)
 
 test_calculadora.py:17: AssertionError
-____________________ test_fatorial_valores_conhecidos[2-2] _____________________
+____________________ test_fatorial_valores_conhecidos[2-2] ____________________
 
 n = 2, esperado = 2
 
@@ -70,7 +69,7 @@ E       assert 0 == 2
 E        +  where 0 = fatorial(2)
 
 test_calculadora.py:17: AssertionError
-___________________ test_fatorial_valores_conhecidos[5-120] ____________________
+___________________ test_fatorial_valores_conhecidos[5-120] ___________________
 
 n = 5, esperado = 120
 
@@ -90,7 +89,7 @@ E       assert 0 == 120
 E        +  where 0 = fatorial(5)
 
 test_calculadora.py:17: AssertionError
-_________________ test_fatorial_valores_conhecidos[10-3628800] _________________
+________________ test_fatorial_valores_conhecidos[10-3628800] _________________
 
 n = 10, esperado = 3628800
 
@@ -110,10 +109,10 @@ E       assert 0 == 3628800
 E        +  where 0 = fatorial(10)
 
 test_calculadora.py:17: AssertionError
-=========================== short test summary info ============================
+=========================== short test summary info ===========================
 FAILED test_calculadora.py::test_fatorial_valores_conhecidos[0-1] - assert 0 ...
 FAILED test_calculadora.py::test_fatorial_valores_conhecidos[1-1] - assert 0 ...
 FAILED test_calculadora.py::test_fatorial_valores_conhecidos[2-2] - assert 0 ...
 FAILED test_calculadora.py::test_fatorial_valores_conhecidos[5-120] - assert ...
 FAILED test_calculadora.py::test_fatorial_valores_conhecidos[10-3628800] - as...
-============================== 5 failed in 0.11s ===============================
+============================== 5 failed in 0.24s ==============================

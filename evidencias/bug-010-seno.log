@@ -1,5 +1,5 @@
 # Entradas digitadas (em ordem): 10 | n
-$ python Calculadora.py
+$ py Calculadora.py
 Bem-vindo à Calculadora Científica
 Escolha a operação que deseja realizar:
 0. Sair
