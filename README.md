@@ -1,6 +1,6 @@
 # Bug Hunter & TDD Calculator
 
-Atividade identificação de defeitos e correção com TDD sobre uma calculadora científica em Python.
+Atividade de identificação de defeitos e correção com TDD sobre uma calculadora científica em Python.
 
 **Autora:** Catarina Carrilho de Almeida | Ciência de Dados e Inteligência Artificial, SENAI CIMATEC | Data: 04/11/2026
 
@@ -29,8 +29,7 @@ O defeito escolhido para o TDD foi o BUG-004 (fatorial retorna sempre zero). O c
 
 
 ## Reflexão sobre o processo com Scrum
-
-Mesmo está atividade sendo uma atividade individual, deu para organizar o trabalho como no Scrum. O relatório de bugs fez o papel de Product Backlog: cada defeito virou um item com severidade, e isso ajudou a decidir por onde começar. A soma errada, por exemplo, é crítica porque afeta a operação mais básica, enquanto os casos de potência indefinida pesam menos. A sprint teve uma meta simples, que era corrigir um bug de ponta a ponta com TDD, e o resultado entregue foi o teste, a correção e a documentação no repositório.
+Mesmo sendo uma atividade individual, deu para organizar o trabalho como no Scrum. O relatório de bugs fez o papel de Product Backlog: cada defeito virou um item com severidade, e isso ajudou a decidir por onde começar. A soma errada, por exemplo, é crítica porque afeta a operação mais básica, enquanto os casos de potência indefinida pesam menos. A sprint teve uma meta simples, que era corrigir um bug de ponta a ponta com TDD, e o resultado entregue foi o teste, a correção e a documentação no repositório.
 
 O BUG-001 virou um impedimento. Para aplicar o TDD no fatorial, os testes precisavam importar o arquivo, mas a calculadora abria o menu logo no import e o pytest travava. Foi preciso resolver isso antes, colocando a chamada dentro do `__main__`, e só depois o ciclo de teste, correção e refatoração pôde andar. A definição de pronto também ajudou: o bug só foi considerado resolvido depois de rodar todos os testes e atualizar o relatório.
 
