@@ -22,6 +22,9 @@ Os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, 
 Calculadora.py        código da calculadora (com a correção do BUG-001 e do BUG-004)
 test_calculadora.py   testes automatizados (pytest)
 Bugs.md               relatório de bugs (BUG-001 a BUG-012)
+gerar_logs.py         script que gerou os logs da pasta evidencias/
+requirements.txt      dependências do projeto (numpy e pytest)
+.gitignore            arquivos ignorados pelo Git (cache do Python e do pytest)
 evidencias/           logs de erro, prints das execuções e saídas do pytest em cada fase do TDD
 ```
 
