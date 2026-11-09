@@ -178,7 +178,7 @@ Vale falar que os prints, os logs e os testes com pytest foram feitos em Windows
 
 ![Testes passando depois da correção](evidencias/tdd-pytest-passando.png)
 
-*Figura 3.
+*Figura 3.*
 
 A correção resolve o bug porque o acumulador deixa de ser multiplicado por zero, e `fatorial(0)` passa a retornar 1, como manda a definição matemática.
 
@@ -436,7 +436,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-011](evidencias/bug-011-print.png)
 
-*Figura 10.
+*Figura 10.*
 
 **Severidade:** Média
 
@@ -475,7 +475,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-012](evidencias/bug-012-print.png)
 
-*Figura 11. 
+*Figura 11.*
 
 **Severidade:** Baixa
 

@@ -14,7 +14,7 @@ pytest -v                 # executa os testes
 
 > **Nota sobre o framework de testes:** o enunciado da atividade cita `unittest` na lista de materiais e `pytest` nas etapas de estudo e prática. Optei pelo `pytest`, que é o framework indicado no passo a passo da atividade e permite escrever os testes de forma mais simples, com `assert` e `@pytest.mark.parametrize`. O `pytest` também executa testes escritos em `unittest`, então a escolha não limita a verificação.
 
-os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`.
+Os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`.
 
 ## Estrutura do repositório
 
