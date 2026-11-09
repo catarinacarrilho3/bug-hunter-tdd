@@ -21,7 +21,7 @@ Relatório dos defeitos encontrados no arquivo `Calculadora.py`.
 | BUG-011 | Entrada que não é número encerra o programa | Média | Não resolvido |
 | BUG-012 | Potenciação sem tratamento de casos indefinidos | Baixa | Não resolvido |
 
-Vale falar que os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`.
+Os prints, os logs e os testes com pytest foram feitos em Windows, Python 3.14, NumPy 2.5.4 e pytest 9.2.0, no terminal do VS Code com `py Calculadora.py`.
 
 ---
 
@@ -178,7 +178,7 @@ Vale falar que os prints, os logs e os testes com pytest foram feitos em Windows
 
 ![Testes passando depois da correção](evidencias/tdd-pytest-passando.png)
 
-*Figura 3.*
+*Figura 3. Saída do pytest após a correção: 9 testes passando e 1 `xfailed`.*
 
 A correção resolve o bug porque o acumulador deixa de ser multiplicado por zero, e `fatorial(0)` passa a retornar 1, como manda a definição matemática.
 
@@ -208,7 +208,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-005](evidencias/bug-005-print.png)
 
-*Figura 4.  o fatorial não existe para números negativos, então a entrada deveria ser recusada.*
+*Figura 4. O fatorial de -3 retorna 1, mas o fatorial não existe para números negativos, então a entrada deveria ser recusada.*
 
 **Severidade:** Média
 
@@ -246,7 +246,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-006](evidencias/bug-006-print.png)
 
-*Figura 5.O traceback termina em `AttributeError: module 'numpy' has no attribute 'ln'` e mostra a linha `np.ln(x)` da função `logaritmo_natural`.*
+*Figura 5. O traceback termina em `AttributeError: module 'numpy' has no attribute 'ln'` e mostra a linha `np.ln(x)` da função `logaritmo_natural`.*
 
 **Severidade:** Alta
 
@@ -398,7 +398,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-010](evidencias/bug-010-print.png)
 
-*Figura 9.  Mesmo aparecendo no menu, a escolha cai no `else` e o programa responde `Operação inválida. Tente novamente.`*
+*Figura 9. Mesmo aparecendo no menu, a escolha cai no `else` e o programa responde `Operação inválida. Tente novamente.`*
 
 **Severidade:** Média
 
@@ -436,7 +436,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-011](evidencias/bug-011-print.png)
 
-*Figura 10.*
+*Figura 10. O programa encerra com `ValueError: could not convert string to float: 'abc'` ao receber texto no lugar de número.*
 
 **Severidade:** Média
 
@@ -475,7 +475,7 @@ A correção resolve o bug porque o acumulador deixa de ser multiplicado por zer
 
 ![Print do BUG-012](evidencias/bug-012-print.png)
 
-*Figura 11.*
+*Figura 11. A potenciação de 0 por -1 mostra `inf` e a de -8 por 0,5 mostra `nan`, ambos sem mensagem de erro.*
 
 **Severidade:** Baixa
 
