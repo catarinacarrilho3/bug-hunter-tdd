@@ -1,6 +1,6 @@
 # Bug Hunter & TDD Calculator
 
-Atividade individual de identificação de defeitos e correção com TDD sobre uma calculadora científica em Python (`Calculadora.py`).
+Atividade identificação de defeitos e correção com TDD sobre uma calculadora científica em Python.
 
 **Autora:** Catarina Carrilho de Almeida | Ciência de Dados e Inteligência Artificial, SENAI CIMATEC | Data: 04/11/2026
 
@@ -27,7 +27,6 @@ Foram identificados 12 defeitos na calculadora, todos descritos em `Bugs.md` com
 
 O defeito escolhido para o TDD foi o BUG-004 (fatorial retorna sempre zero). O ciclo seguiu a ordem Red, Green e Refactor, e cada fase ficou registrada com a saída do pytest em `evidencias/` (`tdd-1-red.log`, `tdd-2-green.log` e `tdd-3-final.log`), além da documentação detalhada no `Bugs.md`. Antes do ciclo, o BUG-001 precisou ser corrigido, já que a chamada solta da função principal impedia qualquer importação do módulo pelos testes. Os demais bugs permanecem registrados como não resolvidos, e o BUG-005, que também envolve o fatorial, aparece nos testes como `xfail` para documentar o comportamento esperado.
 
-## Reflexão sobre o processo com Scrum
 
 ## Reflexão sobre o processo com Scrum
 

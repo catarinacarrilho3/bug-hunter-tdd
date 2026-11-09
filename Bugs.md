@@ -1,6 +1,6 @@
 # Relatório de Bugs - Calculadora.py
 
-Relatório dos defeitos encontrados no arquivo `Calculadora.py` (calculadora científica), feito para a atividade Bug Hunter & TDD Calculator.
+Relatório dos defeitos encontrados no arquivo `Calculadora.py`.
 
 **Autora:** Catarina Carrilho de Almeida | Ciência de Dados e Inteligência Artificial, SENAI CIMATEC | Data: 04/11/2026
 
