@@ -12,6 +12,8 @@ python Calculadora.py     # executa a calculadora
 pytest -v                 # executa os testes
 ```
 
+> **Nota sobre o framework de testes:** o enunciado da atividade cita `unittest` na lista de materiais e `pytest` nas etapas de estudo e prática. Optei pelo `pytest`, que é o framework indicado no passo a passo da atividade e permite escrever os testes de forma mais simples, com `assert` e `@pytest.mark.parametrize`. O `pytest` também executa testes escritos em `unittest`, então a escolha não limita a verificação.
+
 ## Estrutura do repositório
 
 ```
